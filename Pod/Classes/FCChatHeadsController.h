@@ -59,6 +59,8 @@
  */
 + (instancetype)chatHeadsController;
 
++ (instancetype)chatHeadsControllerWithChatHeadFrame:(CGRect)chatHeadFrame;
+
 /**
  @brief method for presenting chat head with image
  @param image The image to be used for chat head.

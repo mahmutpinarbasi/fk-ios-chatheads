@@ -52,6 +52,8 @@ static FCChatHeadsController *_chatHeadsController;
 
 @property (nonatomic, assign) BOOL chatHeadsTransitioning;
 
+@property (nonatomic, assign) CGRect initialChatHeadFrame;
+
 @end
 
 
@@ -62,32 +64,41 @@ static FCChatHeadsController *_chatHeadsController;
 @implementation FCChatHeadsController
 
 
-+ (instancetype)chatHeadsController
-{
++ (instancetype)chatHeadsController{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _chatHeadsController = [FCChatHeadsController new];
+        _chatHeadsController = [[FCChatHeadsController alloc] initChatHeadFrame:DEFAULT_CHAT_HEAD_FRAME];
     });
     
     return _chatHeadsController;
 }
 
-- (instancetype)init
-{
++ (instancetype)chatHeadsControllerWithChatHeadFrame:(CGRect)chatHeadFrame{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _chatHeadsController = [[FCChatHeadsController alloc] initChatHeadFrame:chatHeadFrame];
+    });
+    
+    return _chatHeadsController;
+}
+
+- (instancetype)initChatHeadFrame:(CGRect)chatHeadFrame{
     self = [super init];
     if (self)
     {
+        _initialChatHeadFrame = chatHeadFrame;
         [self setup];
     }
     return self;
 }
 
-- (void)setup
-{
+
+
+- (void)setup{
     self.activeChatHead = nil;
     self.isExpanded = NO;
     self.chatHeads = [NSMutableArray array];
-    _activeChatHeadFrameInStack = DEFAULT_CHAT_HEAD_FRAME;
+    _activeChatHeadFrameInStack = _initialChatHeadFrame;
     self.chatHeadsMoving = NO;
 }
 
