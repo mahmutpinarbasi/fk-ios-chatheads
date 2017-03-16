@@ -59,7 +59,7 @@
  */
 + (instancetype)chatHeadsController;
 
-+ (instancetype)chatHeadsControllerWithChatHeadFrame:(CGRect)chatHeadFrame;
+- (instancetype)initChatHeadFrame:(CGRect)chatHeadFrame;
 
 /**
  @brief method for presenting chat head with image

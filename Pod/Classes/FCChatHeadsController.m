@@ -73,15 +73,6 @@ static FCChatHeadsController *_chatHeadsController;
     return _chatHeadsController;
 }
 
-+ (instancetype)chatHeadsControllerWithChatHeadFrame:(CGRect)chatHeadFrame{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _chatHeadsController = [[FCChatHeadsController alloc] initChatHeadFrame:chatHeadFrame];
-    });
-    
-    return _chatHeadsController;
-}
-
 - (instancetype)initChatHeadFrame:(CGRect)chatHeadFrame{
     self = [super init];
     if (self)
