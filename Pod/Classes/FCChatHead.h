@@ -74,11 +74,6 @@
  */
 @property (nonatomic, assign) NSInteger unreadCount;
 
-
-
-@property (nonatomic, assign) UIViewAutoresizing chatHeadAutoResizing;
-
-
 /**
  @brief Initializer that returns a chat head with image.
  @param image The image to be used for chat head.
