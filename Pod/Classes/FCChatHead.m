@@ -88,9 +88,7 @@
 - (void)setup
 {
     self.backgroundColor = [UIColor clearColor];
-    
     self.exclusiveTouch = YES;
-    
     if (!_panGesture)
     {
         _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
@@ -308,6 +306,11 @@
         else
             _indentationLevel = indentationLevel;
     }
+}
+
+- (void)setChatHeadAutoResizing:(UIViewAutoresizing)chatHeadAutoResizing{
+    _chatHeadAutoResizing = chatHeadAutoResizing;
+    self.autoresizingMask = _chatHeadAutoResizing;
 }
 
 
