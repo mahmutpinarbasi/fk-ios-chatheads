@@ -79,6 +79,10 @@ static FCChatHeadsController *_chatHeadsController;
     {
         _initialChatHeadFrame = chatHeadFrame;
         [self setup];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationWillChange:) name:UIApplicationWillChangeStatusBarOrientationNotification object:nil];
+        }
+
     }
     return self;
 }
@@ -1430,6 +1434,38 @@ static FCChatHeadsController *_chatHeadsController;
         [self.chatHeads removeObject:chatHead];
     }
 }
+
+
+
+#pragma mark - Notification Listener
+- (void)orientationWillChange:(NSNotification *)notification{
+    
+    if (self.chatHeads.count == 0) {
+        return;
+    }
+    
+    FCChatHead * chatHead = (FCChatHead *)[self.chatHeads objectAtIndex:0];
+    CGPoint center = self.headSuperView.center;
+    CGRect frame = chatHead.frame;
+    UIViewAutoresizing resizinMask = UIViewAutoresizingNone;
+    if (CGRectGetMaxY(frame) >= center.y) {
+        resizinMask = UIViewAutoresizingFlexibleTopMargin;
+    }else{
+        resizinMask = UIViewAutoresizingFlexibleBottomMargin;
+    }
+
+    if (CGRectGetMaxX(frame) >= center.x) {
+        resizinMask = resizinMask | UIViewAutoresizingFlexibleLeftMargin;
+    }else{
+        resizinMask = resizinMask | UIViewAutoresizingFlexibleRightMargin;
+    }
+
+    chatHead.autoresizingMask = resizinMask;
+    
+    
+    
+}
+
 
 @end
 
