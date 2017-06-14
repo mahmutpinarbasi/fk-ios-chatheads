@@ -1469,6 +1469,9 @@ static FCChatHeadsController *_chatHeadsController;
 
 - (void)orientationDidChange:(NSNotification *)notification{
     
+    if (self.chatHeads.count == 0) {
+        return;
+    }
     
     // _activeChatHeadFrameInStack'i yeni frame ile güncelle.
     FCChatHead * chatHead = (FCChatHead *)[self.chatHeads objectAtIndex:0];
