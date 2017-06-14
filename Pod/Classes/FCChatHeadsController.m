@@ -81,6 +81,7 @@ static FCChatHeadsController *_chatHeadsController;
         [self setup];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationWillChange:) name:UIApplicationWillChangeStatusBarOrientationNotification object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationDidChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         }
 
     }
@@ -1463,6 +1464,15 @@ static FCChatHeadsController *_chatHeadsController;
     chatHead.autoresizingMask = resizinMask;
     
     
+    
+}
+
+- (void)orientationDidChange:(NSNotification *)notification{
+    
+    
+    // _activeChatHeadFrameInStack'i yeni frame ile güncelle.
+    FCChatHead * chatHead = (FCChatHead *)[self.chatHeads objectAtIndex:0];
+    _activeChatHeadFrameInStack = chatHead.frame;
     
 }
 
