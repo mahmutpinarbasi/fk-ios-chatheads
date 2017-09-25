@@ -18,6 +18,8 @@
 #import "FCChatHead.h"
 #import <pop/POP.h>
 
+const CGFloat badgeWidth = 16.0;
+
 @interface FCChatHead () <POPAnimationDelegate>
 {
     UIPanGestureRecognizer *_panGesture;
@@ -124,10 +126,10 @@
 {
     if (!_badge)
     {
-        CGRect frame = CGRectMake(self.frame.size.width - 15.0, 0.0, 15.0, 15.0);
+        CGRect frame = CGRectMake(self.frame.size.width - badgeWidth, 0.0, badgeWidth, badgeWidth);
         _badge = [UILabel new];
         _badge.frame = frame;
-        _badge.layer.cornerRadius = 7.0;
+        _badge.layer.cornerRadius = badgeWidth/2;
         _badge.layer.masksToBounds = YES;
         _badge.backgroundColor = [UIColor colorWithRed:232.0/255.0 green:62.0/255.0 blue:50.0/255.0 alpha:1.0];
         _badge.textColor = [UIColor whiteColor];
@@ -219,7 +221,7 @@
         self.badge.hidden = (self.unreadCount == 0);
     }
     
-    [self layoutBadge];
+//    [self layoutBadge];
 }
 
 - (void)layoutBadge
@@ -229,7 +231,7 @@
                                               attributes:@{NSFontAttributeName : self.badge.font}
                                                  context:nil];
     frame.origin = self.badge.frame.origin;
-    frame.size.width = MAX(frame.size.width + 8, 15.0);
+    frame.size.width = MAX(frame.size.width + 8, badgeWidth);
     frame.origin.x = self.frame.size.width - frame.size.width/2;
     self.badge.frame = frame;
 }
@@ -274,7 +276,7 @@
             
             self.badge.text = text;
             
-            [self layoutBadge];
+//            [self layoutBadge];
         }
     }
 }
